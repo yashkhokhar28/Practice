@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Add/Edit State";
+    Layout = "_Layout";
+}
+
+@model Practice.Areas.LOC_State.Models.LOC_StateModel;
+
+<main class="main" id="main">
+    <form class="row g-3" role="form" method="post" asp-area="LOC_State" asp-controller="LOC_State" asp-action="LOC_StateSave">
+
+        @Html.HiddenFor(x => x.StateID)
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="StateName" id="countryNameInput" placeholder="Enter State name">
+            <label for="countryNameInput">State Name</label>
+            <span asp-validation-for="StateName" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="StateCode" id="countryCodeInput" placeholder="Enter State code">
+            <label for="countryCodeInput">State Code</label>
+            <span asp-validation-for="StateCode" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating mb-3">
+                <select class="form-control" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))">
+                    <option value="">Select Country</option>
+                </select>
+                <span asp-validation-for="CountryID" class="text-danger"></span>
+                <label for="floatingSelect">Country Name</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-success">Save</button>
+        <a class="btn btn-outline-secondary" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryList">Back</a>
+    </form>
+</main>

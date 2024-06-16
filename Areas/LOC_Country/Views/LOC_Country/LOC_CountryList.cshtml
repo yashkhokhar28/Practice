@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Country List";
+    Layout = "_Layout";
+}
+
+@model DataTable;
+@using System.Data;
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">CountryID</th>
+        <th scope="col">Country Name</th>
+        <th scope="col">Country Code</th>
+        <th scope="col">Created</th>
+        <th scope="col">Modified</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (DataRow dataRow in Model.Rows)
+    {
+        <tr>
+            <td>@dataRow["CountryID"]</td>
+            <td>@dataRow["CountryName"]</td>
+            <td>@dataRow["CountryCode"]</td>
+            <td>@Convert.ToDateTime(@dataRow["Created"]).ToString("U")</td>
+            <td>@Convert.ToDateTime(@dataRow["Modified"]).ToString("U")</td>
+            <td>
+                <a class="btn btn-outline-danger" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryDelete" asp-route-CountryID="@Convert.ToInt32(dataRow["CountryID"])">Delete</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-info" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountrySelectByPK" asp-route-CountryID="@Convert.ToInt32(dataRow["CountryID"])">Edit</a>
+            </td>
+
+        </tr>
+    }
+
+    </tbody>
+</table>

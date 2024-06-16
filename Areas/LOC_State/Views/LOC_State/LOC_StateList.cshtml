@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "State List";
+    Layout = "_Layout";
+}
+
+@model DataTable;
+@using System.Data;
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">StateID</th>
+        <th scope="col">State Name</th>
+        <th scope="col">State Code</th>
+        <th scope="col">Country Name</th>
+        <th scope="col">Country Code</th>
+        <th scope="col">Created</th>
+        <th scope="col">Modified</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (DataRow dataRow in Model.Rows)
+    {
+        <tr>
+            <td>@dataRow["StateID"]</td>
+            <td>@dataRow["StateName"]</td>
+            <td>@dataRow["StateCode"]</td>
+            <td>@dataRow["CountryName"]</td>
+            <td>@dataRow["CountryCode"]</td>
+            <td>@Convert.ToDateTime(@dataRow["Created"]).ToString("U")</td>
+            <td>@Convert.ToDateTime(@dataRow["Modified"]).ToString("U")</td>
+            <td>
+                <a class="btn btn-outline-danger" asp-area="LOC_State" asp-controller="LOC_State" asp-action="LOC_StateDelete" asp-route-StateID="@Convert.ToInt32(dataRow["StateID"])">Delete</a>
+            </td>
+            <td>
+                <a class="btn btn-outline-info" asp-area="LOC_State" asp-controller="LOC_State" asp-action="LOC_StateSelectByPK" asp-route-StateID="@Convert.ToInt32(dataRow["StateID"])">Edit</a>
+            </td>
+
+        </tr>
+    }
+
+    </tbody>
+</table>

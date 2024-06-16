@@ -1,0 +1,28 @@
+@{
+ViewData["Title"] = "Add/Edit Country";
+Layout = "_Layout";
+}
+
+@model Practice.Areas.LOC_Country.Models.LOC_CountryModel;
+
+<main class="main" id="main">
+    <form class="row g-3" role="form" method="post" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountrySave">
+
+        @Html.HiddenFor(x => x.CountryID)
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="CountryName" id="countryNameInput" placeholder="Enter country name">
+            <label for="countryNameInput">Country Name</label>
+            <span asp-validation-for="CountryName" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" asp-for="CountryCode" id="countryCodeInput" placeholder="Enter country code">
+            <label for="countryCodeInput">Country Code</label>
+            <span asp-validation-for="CountryCode" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-outline-success">Save</button>
+        <a class="btn btn-outline-secondary" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryList">Back</a>
+    </form>
+</main>
